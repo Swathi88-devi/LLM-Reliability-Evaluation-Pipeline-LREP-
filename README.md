@@ -70,6 +70,32 @@ python run.py \
  --conversation examples/conversation.json \
  --context examples/context.json \
 --out results.json
+LLM Reliability Evaluation Pipeline — Architecture
+
+**Flowchart**
+
++------------------------+
+|      Input Data        |
+|  (Conversation.csv)    |
++-----------+------------+
+            |
+            v
++------------------------+
+|   Processing Pipeline  |
+| - Preprocessing        |
+| - Semantic Scoring     |
+| - Hallucination Check  |
+| - Keyword Coverage     |
+| - Latency & Cost Calc  |
++-----------+------------+
+            |
+            v
++------------------------+
+|      Output Files      |
+| - batch_results.json   |
+| - evaluation_summary.csv |
++------------------------+
+
 
 **Example Output**
 
