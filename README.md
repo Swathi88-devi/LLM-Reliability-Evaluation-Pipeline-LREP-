@@ -63,10 +63,14 @@ Inputs and outputs are plain JSON, fitting smoothly into existing workflows
 
 **Running Locally**
 
-To install dependencies:
+1. install dependencies:
 pip install -r requirements.txt
-To run the evaluation:
-python run.py \
+2.Place conversation data inside:
+/Input/Conversation.csv
+3. Run the pipeline:
+python run(Code).py
+4.Outputs are generated in:
+/Outputs/
  --conversation examples/conversation.json \
  --context examples/context.json \
 --out results.json
