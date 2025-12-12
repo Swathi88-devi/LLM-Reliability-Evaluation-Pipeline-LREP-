@@ -1,7 +1,10 @@
                                                        
  **Introduction**
+ 
 Large language models are everywhere these days, churning out thousands of responses every minute across various platforms. With such massive scale, even the tiniest errors can slip through the cracks and end up being costly or misleading. This pipeline aims to tackle that issue by automatically reviewing and scoring LLM replies. It checks how closely the response aligns with the available context, whether it includes key information, and if any sentence veers off track or sounds fabricated.The system uses sentence embeddings, keyword checks, and similarity scores to flag possible hallucinations. The idea is to provide a fast and clear way to evaluate responses that can work alongside any retrieval-augmented generation (RAG) or conversational AI system.
+
 **Project Structure**
+
 llm-evaluation-pipeline/
 │── pipeline.py # Core evaluation logic
 │── run.py# Optional CLI tool (takes JSON input)
@@ -9,7 +12,9 @@ llm-evaluation-pipeline/
 │── requirements.txt # Dependencies│── examples    
 ├── conversation.json  # Sample conversation input
 ├── context.json       # Sample context documents
+
 **How the Pipeline Works**
+
 The system requires two JSON inputs:
 1. Conversation JSON
 This contains the user’s question, the model’s response, and optional metadata like timestamps or token counts.
@@ -17,7 +22,9 @@ This contains the user’s question, the model’s response, and optional metada
 This includes a list of context documents (typically pulled from a vector database). Each item looks like:
 { "text": "..." }
 These documents help verify whether the model stayed grounded or went off the rails.
+
 **Core Evaluation Logic**
+
 **1. Relevance Score**
 The response is broken down into individual sentences, each embedded using an SBERT model. Every sentence is then compared with all context vectors using cosine similarity.A sentence that closely matches any part of the context will have a high similarity score, which directly influences the relevance evaluation.
 **2. Completeness Score**
@@ -32,13 +39,16 @@ If start and end timestamps are available, the pipeline calculates the time it t
 **5. Token and Cost Estimation**
 If token counts aren’t provided, the system estimates them using the tiktoken library or a backup method. The cost is calculated with a simple formula:
 cost_usd = (tokens / 1000) * cost_per_1k_tokens
+
 **Why This Design Works Well**
+
 By evaluating at the sentence level, we avoid crediting irrelevant parts of the response.
 MiniLM (all-MiniLM-L6-v2) delivers decent semantic performance while being fast and light on resources.
 Batching keeps the pipeline efficient, even when checking a large number of sentences.
 The design is managed through an EvalConfig dataclass, making it easy to tweak thresholds and models.
 Overall, the structure is modular and integrates well with RAG systems or vector-database-based retrieval setups.
  **Scaling Considerations**
+ 
 This pipeline is made to be lightweight, allowing it to handle heavy workloads. Some features that help with scaling include:
 Batched embedding for improved throughput
 Minimal preprocessing (just basic sentence splitting and keyword extraction)
