@@ -126,3 +126,10 @@ Basic logging
 **Conclusion**
 
 This project combines a variety of lightweight techniques to evaluate LLM responses in a structured, understandable way. It checks quality, factual accuracy, completeness, and cost-efficiency of model outputs without depending on heavy LLM calls. The pipeline is flexible enough to integrate into a production RAG system and straightforward enough to run locally during development.
+
+**Future Improvements**
+
+- Add LLM-based self-evaluation scoring
+- Add multi-model comparison (GPT, Claude, Gemini)
+- Add visualization dashboard for metrics
+- Add automated test cases for pipeline components
