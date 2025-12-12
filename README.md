@@ -27,15 +27,19 @@ These documents help verify whether the model stayed grounded or went off the ra
 
 **1. Relevance Score**
 The response is broken down into individual sentences, each embedded using an SBERT model. Every sentence is then compared with all context vectors using cosine similarity.A sentence that closely matches any part of the context will have a high similarity score, which directly influences the relevance evaluation.
+
 **2. Completeness Score**
 The pipeline pulls out basic keywords from the context documents and checks how many of those show up in the LLM’s response. It’s a straightforward way to assess whether the answer addressed the key points from the retrieved information.
+
 **3. Hallucination Check**
 If a sentence’s similarity score dips below a certain threshold (0.35 by default), it’s flagged as a potential hallucination. For each flagged sentence, the pipeline logs:
 the sentence text
 its highest similarity score
 This gives a clearer picture of which parts of the response might be unreliable.
+
 **4. Latency (Optional)**
 If start and end timestamps are available, the pipeline calculates the time it took for the model to respond. This can be helpful when comparing different LLMs under similar loads.
+
 **5. Token and Cost Estimation**
 If token counts aren’t provided, the system estimates them using the tiktoken library or a backup method. The cost is calculated with a simple formula:
 cost_usd = (tokens / 1000) * cost_per_1k_tokens
@@ -47,6 +51,7 @@ MiniLM (all-MiniLM-L6-v2) delivers decent semantic performance while being fast 
 Batching keeps the pipeline efficient, even when checking a large number of sentences.
 The design is managed through an EvalConfig dataclass, making it easy to tweak thresholds and models.
 Overall, the structure is modular and integrates well with RAG systems or vector-database-based retrieval setups.
+
  **Scaling Considerations**
  
 This pipeline is made to be lightweight, allowing it to handle heavy workloads. Some features that help with scaling include:
@@ -55,7 +60,9 @@ Minimal preprocessing (just basic sentence splitting and keyword extraction)
 A small SBERT model to keep GPU costs down
 Operates purely on embeddings—no extra LLM calls needed
 Inputs and outputs are plain JSON, fitting smoothly into existing workflows
+
 **Running Locally**
+
 To install dependencies:
 pip install -r requirements.txt
 To run the evaluation:
