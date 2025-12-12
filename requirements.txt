@@ -1,0 +1,5 @@
+sentence-transformers==2.7.0
+numpy==1.26.4
+pandas==2.1.4
+tqdm==4.66.1
+tiktoken==0.6.0
