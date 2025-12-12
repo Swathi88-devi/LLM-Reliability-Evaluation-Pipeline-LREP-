@@ -52,6 +52,15 @@ Batching keeps the pipeline efficient, even when checking a large number of sent
 The design is managed through an EvalConfig dataclass, making it easy to tweak thresholds and models.
 Overall, the structure is modular and integrates well with RAG systems or vector-database-based retrieval setups.
 
+**Project Highlights**
+
+- End-to-end LLM evaluation pipeline
+- Covers semantic scoring, hallucination detection, and keyword completeness
+- Measures latency + token-based cost
+- Modular architecture (easy to extend)
+- Clean Input/Output folder structure for quick testing
+
+
  **Scaling Considerations**
  
 This pipeline is made to be lightweight, allowing it to handle heavy workloads. Some features that help with scaling include:
