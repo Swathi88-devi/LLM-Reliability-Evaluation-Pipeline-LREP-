@@ -55,13 +55,18 @@ python run.py \
 --out results.json
 
 **Example Output**
+
 {  "relevance_score": 0.81,  "completeness_score": 0.62,  "hallucination_detected": true,  "hallucinated_sentences": [    {      "sentence": "The product was launched in 1995.",      "max_similarity": 0.21    }  ],  "latency_ms": 128,  "estimated_tokens": 42,  "estimated_cost_usd": 0.00008}
+
 **Tools and Libraries**
+
 Python 3.10+
 Sentence Transformers (SBERT)
 NumPy, Pandas
 tiktoken
 JSON for input/output
 Basic logging
+
 **Conclusion**
+
 This project combines a variety of lightweight techniques to evaluate LLM responses in a structured, understandable way. It checks quality, factual accuracy, completeness, and cost-efficiency of model outputs without depending on heavy LLM calls. The pipeline is flexible enough to integrate into a production RAG system and straightforward enough to run locally during development.
