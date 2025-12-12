@@ -53,6 +53,7 @@ python run.py \
  --conversation examples/conversation.json \
  --context examples/context.json \
 --out results.json
+
 **Example Output**
 {  "relevance_score": 0.81,  "completeness_score": 0.62,  "hallucination_detected": true,  "hallucinated_sentences": [    {      "sentence": "The product was launched in 1995.",      "max_similarity": 0.21    }  ],  "latency_ms": 128,  "estimated_tokens": 42,  "estimated_cost_usd": 0.00008}
 **Tools and Libraries**
