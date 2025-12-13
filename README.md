@@ -17,8 +17,9 @@ pip
 git clone https://github.com/<your-username>/llm-evaluation-pipeline.gitcd llm-evaluation-pipeline
 
 **(Optional) Set up a virtual environment:**
-python -m venv .venvsource .venv/bin/activate  # For Windows: .venv\Scripts\activat
-Install the required dependencies:
+
+python -m venv .venvsource .venv/bin/activate  # For Windows: .venv\Scripts\activate
+**Install the required dependencies:**
 pip install -r requirements.txt
 Put your input files in the input/ folder:
 conversation.csv (model responses)
