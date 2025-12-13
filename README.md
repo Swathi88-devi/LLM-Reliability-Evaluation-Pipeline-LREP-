@@ -14,7 +14,7 @@ pip
 
 **Clone the repository:**
 
-git clone https://github.com/<your-username>/llm-evaluation-pipeline.git
+git clone https://github.com/Swathi88-devi/LLM-Reliability-Evaluation-Pipeline-LREP-.git
 
 cd llm-evaluation-pipeline
 
