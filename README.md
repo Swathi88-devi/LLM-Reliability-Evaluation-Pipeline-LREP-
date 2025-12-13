@@ -37,6 +37,24 @@ python code/run.py
 
 batch_results.json
 evaluation_summary.csv
+**How the Pipeline Works**
+
+The system requires two JSON inputs:
+1. Conversation JSON
+This contains the user’s question, the model’s response, and optional metadata like timestamps or token counts.
+2. Context JSON
+This includes a list of context documents (typically pulled from a vector database). Each item looks like:
+{ "text": "..." }
+These documents help verify whether the model stayed grounded or went off the rails.
+
+
+**Project Highlights**
+
+- End-to-end LLM evaluation pipeline
+- Covers semantic scoring, hallucination detection, and keyword completeness
+- Measures latency + token-based cost
+- Modular architecture (easy to extend)
+- Clean Input/Output folder structure for quick testing
 
 **Architecture of the Evaluation Pipeline**
 
@@ -63,6 +81,27 @@ Preprocessing Module  - Text cleaning  - Sentence splitting
      - batch_results.json
      - evaluation_summary.csv
 The pipeline is modular and runs entirely on embeddings, which makes it easy to integrate with Retrieval-Augmented Generation (RAG) systems or conversational AI platforms.
+
+**Core Evaluation Logic**
+
+**1. Relevance Score**
+The response is broken down into individual sentences, each embedded using an SBERT model. Every sentence is then compared with all context vectors using cosine similarity.A sentence that closely matches any part of the context will have a high similarity score, which directly influences the relevance evaluation.
+
+**2. Completeness Score**
+The pipeline pulls out basic keywords from the context documents and checks how many of those show up in the LLM’s response. It’s a straightforward way to assess whether the answer addressed the key points from the retrieved information.
+
+**3. Hallucination Check**
+If a sentence’s similarity score dips below a certain threshold (0.35 by default), it’s flagged as a potential hallucination. For each flagged sentence, the pipeline logs:
+the sentence text
+its highest similarity score
+This gives a clearer picture of which parts of the response might be unreliable.
+
+**4. Latency (Optional)**
+If start and end timestamps are available, the pipeline calculates the time it took for the model to respond. This can be helpful when comparing different LLMs under similar loads.
+
+**5. Token and Cost Estimation**
+If token counts aren’t provided, the system estimates them using the tiktoken library or a backup method. The cost is calculated with a simple formula:
+cost_usd = (tokens / 1000) * cost_per_1k_tokens.
 
 **Design Decisions (Why This Approach)**
 
@@ -119,6 +158,10 @@ llm-evaluation-pipeline/
 
 └── README.md
 
+**Example Output**
+
+{  "relevance_score": 0.81,  "completeness_score": 0.62,  "hallucination_detected": true,  "hallucinated_sentences": [    {      "sentence": "The product was launched in 1995.",      "max_similarity": 0.21    }  ],  "latency_ms": 128,  "estimated_tokens": 42,  "estimated_cost_usd": 0.00008}
+
 **Technologies Used**
 
 Python 3.10+
@@ -128,6 +171,10 @@ Sentence Transformers (SBERT)
 NumPy, Pandas
 
 scikit-learn
+
+tiktoken
+
+Basic logging
 
 JSON / CSV
 
@@ -139,15 +186,19 @@ This repository is open for public review.
 
 The solution is made to be easily extendable for more metrics or evaluation strategies.
 
+**Conclusion**
+
+This project combines a variety of lightweight techniques to evaluate LLM responses in a structured, understandable way. It checks quality, factual accuracy, completeness, and cost-efficiency of model outputs without depending on heavy LLM calls. The pipeline is flexible enough to integrate into a production RAG system and straightforward enough to run locally during development.
+
 **Future Improvements**
 
-Support for comparing multiple models
+- Support for comparing multiple models
 
-Advanced keyword extraction (like RAKE/YAKE)
+- Advanced keyword extraction (like RAKE/YAKE)
 
-A dashboard for visualizing evaluation metrics
+- A dashboard for visualizing evaluation metrics
 
-Streaming capabilities for real-time evaluations
+- Streaming capabilities for real-time evaluations
 
 
 
