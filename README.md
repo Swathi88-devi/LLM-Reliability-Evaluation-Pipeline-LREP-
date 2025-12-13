@@ -70,48 +70,27 @@ This approach is intentionally designed to be simple, fast, and budget-friendly:
 
 - Sentence-level evaluation helps prevent irrelevant or hallucinated sentences from skewing overall scores.
 
-Embedding-based similarity avoids costly secondary LLM requests while ensuring semantic accuracy.
+- Embedding-based similarity avoids costly secondary LLM requests while ensuring semantic accuracy.
 
--Lightweight SBERT models (like MiniLM) strike a great balance between speed and performance.
+- Lightweight SBERT models (like MiniLM) strike a great balance between speed and performance.
 
--Minimal preprocessing cuts down on overhead and makes debugging simpler.
+- Minimal preprocessing cuts down on overhead and makes debugging simpler.
 
--Plain CSV/JSON I/O allows easy integration into current data pipelines.
+- Plain CSV/JSON I/O allows easy integration into current data pipelines.
 We steered clear of alternatives that relied on extra LLM-based verification because they typically involve higher latency and costs, which wouldn't work well for real-time or high-volume scenarios.
 
-
-
-Scalability, Latency & Cost Optimization
+**Scalability, Latency & Cost Optimization**
 
 The pipeline is set up to handle millions of evaluations each day with minimal operational costs:
 
-
-
-
-
 Batch embedding computation boosts throughput and lessens per-request overhead.
-
-
-
 Small embedding models greatly lower inference latency.
-
-
-
 No extra LLM calls are needed during evaluation, keeping expenses in check.
-
-
-
 Pure embedding-based logic makes scaling across workers easy.
-
-
-
 Simple data formats support parallel processing and quick serialization/deserialization.
-
 These choices keep the system responsive and cost-efficient, even under heavy workloads.
 
-
-
-Project Structure
+**Project Structure**
 
 llm-evaluation-pipeline/├── code/│   ├── pipeline.py│   └── run.py├── input/│   └── conversation.csv├── output/│   ├── batch_results.json│   └── evaluation_summary.csv├── requirements.txt└── README.md
 
