@@ -13,8 +13,10 @@ pip
 **Steps**
 
 **Clone the repository:**
+
 git clone https://github.com/<your-username>/llm-evaluation-pipeline.gitcd llm-evaluation-pipeline
-(Optional) Set up a virtual environment:
+
+**(Optional) Set up a virtual environment:**
 python -m venv .venvsource .venv/bin/activate  # For Windows: .venv\Scripts\activat
 Install the required dependencies:
 pip install -r requirements.txt
