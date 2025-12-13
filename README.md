@@ -68,9 +68,9 @@ The pipeline is modular and runs entirely on embeddings, which makes it easy to 
 
 This approach is intentionally designed to be simple, fast, and budget-friendly:
 
--Sentence-level evaluation helps prevent irrelevant or hallucinated sentences from skewing overall scores.
+- Sentence-level evaluation helps prevent irrelevant or hallucinated sentences from skewing overall scores.
 
--Embedding-based similarity avoids costly secondary LLM requests while ensuring semantic accuracy.
+Embedding-based similarity avoids costly secondary LLM requests while ensuring semantic accuracy.
 
 -Lightweight SBERT models (like MiniLM) strike a great balance between speed and performance.
 
