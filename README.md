@@ -19,42 +19,56 @@ git clone https://github.com/<your-username>/llm-evaluation-pipeline.gitcd llm-e
 **(Optional) Set up a virtual environment:**
 
 python -m venv .venvsource .venv/bin/activate  # For Windows: .venv\Scripts\activate
+
 **Install the required dependencies:**
+
 pip install -r requirements.txt
-Put your input files in the input/ folder:
+
+**Put your input files in the input/ folder:**
+
 conversation.csv (model responses)
 Optional context files (CSV/JSON)
-Run the pipeline:
+
+**Run the pipeline:**
 python code/run.py
-You’ll find the outputs in the output/ folder:
+
+**You’ll find the outputs in the output/ folder:**
+
 batch_results.json
 evaluation_summary.csv
 
 **Architecture of the Evaluation Pipeline**
 
-Input Data (conversation.csv)          |          v  Preprocessing Module  - Text cleaning  - Sentence splitting          |          v  Evaluation Engine  - Sentence-level embeddings (SBERT)  - Cosine similarity with context  - Keyword completeness check  - Hallucination detection          |          v  Aggregation & Scoring  - Relevance score  - Completeness score  - Flags for unreliable sentences          |          vOutput Generation- batch_results.json- evaluation_summary.csv
-
+Input Data (conversation.csv)         
+       |         
+       v  
+Preprocessing Module  - Text cleaning  - Sentence splitting 
+        |         
+        v  
+ Evaluation Engine 
+- Sentence-level embeddings (SBERT)
+- Cosine similarity with context
+- Keyword completeness check
+-  Hallucination detection
+         |
+         v
+   Aggregation & Scoring
+   - Relevance score
+   - Completeness score
+   - Flags for unreliable sentences
+            |
+            v
+     Output Generation
+     - batch_results.json
+     - evaluation_summary.csv
 The pipeline is modular and runs entirely on embeddings, which makes it easy to integrate with Retrieval-Augmented Generation (RAG) systems or conversational AI platforms.
 
-
-
-Design Decisions (Why This Approach)
+**Design Decisions (Why This Approach)**
 
 This approach is intentionally designed to be simple, fast, and budget-friendly:
-
-
-
-
-
-Sentence-level evaluation helps prevent irrelevant or hallucinated sentences from skewing overall scores.
-
-
-
-Embedding-based similarity avoids costly secondary LLM requests while ensuring semantic accuracy.
-
-
-
-Lightweight SBERT models (like MiniLM) strike a great balance between speed and performance.
+-Sentence-level evaluation helps prevent irrelevant or hallucinated sentences from skewing overall scores.
+-Embedding-based similarity avoids costly secondary LLM requests while ensuring semantic accuracy.
+-Lightweight SBERT models (like MiniLM) strike a great balance between speed and performance.
 
 
 
