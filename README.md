@@ -30,6 +30,7 @@ conversation.csv (model responses)
 Optional context files (CSV/JSON)
 
 **Run the pipeline:**
+
 python code/run.py
 
 **You’ll find the outputs in the output/ folder:**
@@ -66,18 +67,16 @@ The pipeline is modular and runs entirely on embeddings, which makes it easy to 
 **Design Decisions (Why This Approach)**
 
 This approach is intentionally designed to be simple, fast, and budget-friendly:
+
 -Sentence-level evaluation helps prevent irrelevant or hallucinated sentences from skewing overall scores.
+
 -Embedding-based similarity avoids costly secondary LLM requests while ensuring semantic accuracy.
+
 -Lightweight SBERT models (like MiniLM) strike a great balance between speed and performance.
 
+-Minimal preprocessing cuts down on overhead and makes debugging simpler.
 
-
-Minimal preprocessing cuts down on overhead and makes debugging simpler.
-
-
-
-Plain CSV/JSON I/O allows easy integration into current data pipelines.
-
+-Plain CSV/JSON I/O allows easy integration into current data pipelines.
 We steered clear of alternatives that relied on extra LLM-based verification because they typically involve higher latency and costs, which wouldn't work well for real-time or high-volume scenarios.
 
 
