@@ -14,11 +14,15 @@ pip
 
 **Clone the repository:**
 
-git clone https://github.com/<your-username>/llm-evaluation-pipeline.gitcd llm-evaluation-pipeline
+git clone https://github.com/<your-username>/llm-evaluation-pipeline.git
+
+cd llm-evaluation-pipeline
 
 **(Optional) Set up a virtual environment:**
 
-python -m venv .venvsource .venv/bin/activate  # For Windows: .venv\Scripts\activate
+python -m venv .venv
+
+source .venv/bin/activate  # For Windows: .venv\Scripts\activate
 
 **Install the required dependencies:**
 
@@ -39,12 +43,14 @@ batch_results.json
 evaluation_summary.csv
 **How the Pipeline Works**
 
-The system requires two JSON inputs:
-1. Conversation JSON
-This contains the user’s question, the model’s response, and optional metadata like timestamps or token counts.
-2. Context JSON
-This includes a list of context documents (typically pulled from a vector database). Each item looks like:
-{ "text": "..." }
+The system supports both CSV and JSON inputs for conversations and context documents:
+
+1. Conversation Input (CSV or JSON)
+This contains the user’s question, the model’s response, and optional metadata such as timestamps or token counts.
+
+2. Context Input (CSV or JSON)
+This includes a list of context documents (typically retrieved from a vector database), where each entry contains the text used for grounding the evaluation.
+
 These documents help verify whether the model stayed grounded or went off the rails.
 
 
