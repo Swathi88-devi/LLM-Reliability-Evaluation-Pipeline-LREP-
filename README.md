@@ -1,4 +1,4 @@
-**LLM Evaluation**
+**LLM Evaluation Pipeline**
 
 **Overview**
 
@@ -81,20 +81,33 @@ We steered clear of alternatives that relied on extra LLM-based verification bec
 
 **Scalability, Latency & Cost Optimization**
 
-The pipeline is set up to handle millions of evaluations each day with minimal operational costs:
+- The pipeline is set up to handle millions of evaluations each day with minimal operational costs:
 
-Batch embedding computation boosts throughput and lessens per-request overhead.
-Small embedding models greatly lower inference latency.
-No extra LLM calls are needed during evaluation, keeping expenses in check.
-Pure embedding-based logic makes scaling across workers easy.
-Simple data formats support parallel processing and quick serialization/deserialization.
-These choices keep the system responsive and cost-efficient, even under heavy workloads.
+- Batch embedding computation boosts throughput and lessens per-request overhead.
+
+- Small embedding models greatly lower inference latency.
+
+- No extra LLM calls are needed during evaluation, keeping expenses in check.
+
+- Pure embedding-based logic makes scaling across workers easy.
+
+- Simple data formats support parallel processing and quick serialization/deserialization.
+
+- These choices keep the system responsive and cost-efficient, even under heavy workloads.
 
 **Project Structure**
 
-llm-evaluation-pipeline/├── code/│   ├── pipeline.py│   └── run.py├── input/│   └── conversation.csv├── output/│   ├── batch_results.json│   └── evaluation_summary.csv├── requirements.txt└── README.md
-
-
+llm-evaluation-pipeline/
+├── code/
+│ ├── pipeline.py
+│ └── run.py
+├── input/
+│ └── conversation.csv
+├── output/
+│ ├── batch_results.json
+│ └── evaluation_summary.csv
+├── requirements.txt
+└── README.md
 
 Technologies Used
 
