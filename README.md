@@ -98,78 +98,54 @@ We steered clear of alternatives that relied on extra LLM-based verification bec
 **Project Structure**
 
 llm-evaluation-pipeline/
+
 ├── code/
+
 │ ├── pipeline.py
+
 │ └── run.py
+
 ├── input/
+
 │ └── conversation.csv
+
 ├── output/
+
 │ ├── batch_results.json
+
 │ └── evaluation_summary.csv
+
 ├── requirements.txt
+
 └── README.md
 
-Technologies Used
-
-
-
-
+**Technologies Used**
 
 Python 3.10+
 
-
-
 Sentence Transformers (SBERT)
-
-
 
 NumPy, Pandas
 
-
-
 scikit-learn
-
-
 
 JSON / CSV
 
-
-
-Notes
-
-
-
-
+**Notes**
 
 The code follows PEP-8 guidelines where relevant.
 
-
-
 This repository is open for public review.
-
-
 
 The solution is made to be easily extendable for more metrics or evaluation strategies.
 
-
-
-Future Improvements
-
-
-
-
+**Future Improvements**
 
 Support for comparing multiple models
 
-
-
 Advanced keyword extraction (like RAKE/YAKE)
 
-
-
 A dashboard for visualizing evaluation metrics
-
-
 
 Streaming capabilities for real-time evaluations
 
